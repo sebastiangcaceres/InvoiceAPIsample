@@ -16,3 +16,13 @@ CRUD:
 + Read/Get All and by Id (GET)
 + Update (PUT)
 + Delete (DELETE)
+
+
+UPDATES (25/6/2023)
++ Invoice Lines, added a collection of lines to Invoice, model, DB (migrations), etc.
++ ConnectionStrings, the ConnectionStrings was moved from appsettings.json to appsettings.Development.json.
++ FluentValidation, added an Invoice Validator with rules and the logic in his controller to validate on POST and PUT.
++ Repository pattern, added the repository pattern in the DAL folder and the logic in his controller.
++ Swagger configuration, added configuration to swagger.
++ Integration test, added new test project with automated test cases: GetAllInvoices and InsertInvoices.
++ ActionResult, all CRUD metods return ActionResults now.

@@ -4,6 +4,10 @@ namespace InvoiceAPIsample.Models
 {
     public class Invoices
     {
+        public Invoices()
+        {
+            InvoiceLines = new HashSet<InvoiceLines>();
+        }
         [Key]
         public int Id { get; set; }
         /// <summary>
@@ -23,5 +27,10 @@ namespace InvoiceAPIsample.Models
         /// </summary>
         public decimal Total { get; set; }
 
+        public virtual ICollection<InvoiceLines> InvoiceLines { get; set; } 
+
     }
+
+
 }
+

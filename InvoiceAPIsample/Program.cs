@@ -1,16 +1,20 @@
 using InvoiceAPIsample.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddDbContext<InvoiceDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DbCon")));
-
+builder.Services.AddDbContext<InvoiceDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DevCon")));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    { Title = "Invoice API Sample", Version = "v1" });
+});
+
 
 var app = builder.Build();
 
@@ -18,7 +22,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Invoice API Sample");
+    });
 }
 
 app.UseHttpsRedirection();
